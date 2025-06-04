@@ -15,7 +15,7 @@ void boardPrint(char arr[9]) {
     }
 }
 
-char checkWin(char arr[9]) { // Not finished
+char checkWin(char arr[9]) { // Not finished redo please
     for (int i = 0; i < 9; i++) {
         if (arr[i] == 'X') {
             return 'X';
