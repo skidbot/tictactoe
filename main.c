@@ -1,6 +1,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+
+bool gameInProgress = true;
+
 void boardPrint(char arr[9]) {
     for (int i = 0; i < 9; i++) {
         printf(" %c ", arr[i]);
@@ -26,13 +29,16 @@ char checkWin(char arr[9]) { // Not finished redo please
         else {
             return '1';
             }
-    }
+    } //     bool gameInProgress = false;
     return false;
 }
 
-char updateBoard(char arr[9]) {
+void updateBoard(int choice, char arr[9]) {
     // Replace number with X or O and check for win afterwards
+
+
     if (checkWin(arr) == true) {
+        gameInProgress = false;
         return 'W';
     }
 
@@ -40,8 +46,21 @@ char updateBoard(char arr[9]) {
 }
 
 int main(void) {
+
+
     char arr[9] = {'1','2','3','4','5','6','7','8','9'};
+    int choice;
     // While Loop for Input from both players until win
-    updateBoard(arr);
+    updateBoard(choice, arr);
+
+    while (gameInProgress) {
+        printf("Player 1 Turn (X):");
+        scanf("%d", &choice);
+        updateBoard(&choice, arr);
+
+        printf("Player 2 Turn (O):");
+        scanf("%d", &choice);
+        updateBoard(&choice, arr);
+    }
     return 0;
 }
