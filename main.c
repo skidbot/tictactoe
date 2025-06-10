@@ -63,7 +63,7 @@ int main(void) {
     updateBoard(choice, arr);
 
     while (gameInProgress) {
-        printf("Player 1 Turn:");
+        printf("Player %c Turn:", currentPlayer);
         scanf("%d", &choice);
 
         choice--; // Adjust index since (1-9 input maps to 0-8
