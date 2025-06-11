@@ -2,6 +2,13 @@
 #include <stdio.h>
 
 
+struct Game {
+    char arr[9];
+    int choice;
+    char currentPlayer;
+    bool gameInProgress;
+};
+
 void boardPrint(char arr[9]) {
     for (int i = 0; i < 9; i++) {
         printf(" %c ", arr[i]);
@@ -54,38 +61,38 @@ bool isDraw(char arr[]) {
 
 int main(void) {
 
-    char arr[9] = {'1','2','3','4','5','6','7','8','9'};
-    int choice;
-    char currentPlayer = 'X';
-    bool gameInProgress = true;
+    struct Game game = {{'1','2','3','4','5','6','7','8','9'},
+        -1,
+        'X',
+        true};
 
     // While Loop for Input from both players until win
-    updateBoard(choice, arr);
+    updateBoard(game.choice, game.arr);
 
-    while (gameInProgress) {
-        printf("Player %c Turn:", currentPlayer);
-        scanf("%d", &choice);
+    while (game.gameInProgress) {
+        printf("Player %c Turn:", game.currentPlayer);
+        scanf("%d", &game.choice);
 
-        choice--; // Adjust index since (1-9 input maps to 0-8
+        game.choice--; // Adjust index since (1-9 input maps to 0-8
 
-        if (choice < 0 || choice > 8 || arr[choice] == 'X' || arr[choice] == 'O') {
+        if (game.choice < 0 || game.choice > 8 || game.arr[game.choice] == 'X' || game.arr[game.choice] == 'O') {
             printf("Invalid move. Try again.\n");
             continue;
         }
 
-        arr[choice] = currentPlayer;
-        updateBoard(choice, arr);
+        game.arr[game.choice] = game.currentPlayer;
+        updateBoard(game.choice, game.arr);
 
-        if (checkWin(arr)) {
-            printf("Player %c wins.\n", currentPlayer);
-            gameInProgress = false;
+        if (checkWin(game.arr)) {
+            printf("Player %c wins.\n", game.currentPlayer);
+            game.gameInProgress = false;
         }
-        else if (isDraw(arr)) {
+        else if (isDraw(game.arr)) {
             printf("It's a draw!\n");
-            gameInProgress = false;
+            game.gameInProgress = false;
         }
         else {
-            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X';
         }
 
     }
