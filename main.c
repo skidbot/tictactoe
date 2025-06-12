@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-
 struct Game {
     char arr[9];
     int choice;
@@ -21,6 +20,10 @@ void boardPrint(char arr[9]) {
             printf("|");
         }
     }
+}
+
+void updateBoard(int choice, char arr[9]) {
+    boardPrint(arr);
 }
 
 bool checkWin(char arr[9]) {
@@ -47,20 +50,6 @@ bool checkWin(char arr[9]) {
     return false;
 }
 
-void updateBoard(int choice, char arr[9]) {
-    // Replace number with X or O and check for win afterwards
-
-
-    if (checkWin(arr) == false) {
-
-    }
-    else if (checkWin(arr) == true) {
-
-    }
-
-    return boardPrint(arr);
-}
-
 bool isDraw(char arr[]) {
     for (int i = 0; i < 9; i++) {
         if (arr[i] != 'X' && arr[i] != 'O') return false;
@@ -79,10 +68,16 @@ int main(void) {
     updateBoard(game.choice, game.arr);
 
     while (game.gameInProgress) {
-        printf("Player %c Turn:", game.currentPlayer);
-        scanf("%d", &game.choice);
+        printf("Player %c Turn: ", game.currentPlayer);
 
-        game.choice--; // Adjust index since (1-9 input maps to 0-8
+        // Validate input
+        if (scanf("%d", &game.choice) != 1) {
+            printf("Invalid input. Please enter a number from 1 to 9.\n");
+            while (getchar() != '\n'); // Clear invalid input from buffer
+            continue;
+        }
+
+        game.choice--; // Adjust index since (1-9 input maps to 0-8)
 
         if (game.choice < 0 || game.choice > 8 || game.arr[game.choice] == 'X' || game.arr[game.choice] == 'O') {
             printf("Invalid move. Try again.\n");
@@ -103,7 +98,7 @@ int main(void) {
         else {
             game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X';
         }
-
     }
+
     return 0;
 }
