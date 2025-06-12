@@ -23,18 +23,27 @@ void boardPrint(char arr[9]) {
     }
 }
 
-bool checkWin(char arr[9]) { // Not finished redo please
-    for (int i = 0; i < 9; i++) {
-        if (arr[i] == 'X') {
-            return 'X';
+bool checkWin(char arr[9]) {
+    // Check rows
+    for (int i = 0; i <= 6; i += 3) {
+        if (arr[i] == arr[i + 1] && arr[i + 1] == arr[i + 2]) {
+            return true;
         }
-        else if (arr[i] == 'O') {
-            return 'O';
+    }
+
+    // Check columns
+    for (int i = 0; i < 3; i++) {
+        if (arr[i] == arr[i + 3] && arr[i + 3] == arr[i + 6]) {
+            return true;
         }
-        else {
-            return '1';
-            }
-    } //     bool gameInProgress = false;
+    }
+
+    // Check diagonals
+    if ((arr[0] == arr[4] && arr[4] == arr[8]) ||
+        (arr[2] == arr[4] && arr[4] == arr[6])) {
+        return true;
+    }
+
     return false;
 }
 
