@@ -22,10 +22,6 @@ void boardPrint(char arr[9]) {
     }
 }
 
-void updateBoard(int choice, char arr[9]) {
-    boardPrint(arr);
-}
-
 bool checkWin(char arr[9]) {
     // Check rows
     for (int i = 0; i <= 6; i += 3) {
@@ -65,7 +61,7 @@ int main(void) {
         true};
 
     // While Loop for Input from both players until win
-    updateBoard(game.choice, game.arr);
+    boardPrint(game.arr);
 
     while (game.gameInProgress) {
         printf("Player %c Turn: ", game.currentPlayer);
@@ -85,7 +81,7 @@ int main(void) {
         }
 
         game.arr[game.choice] = game.currentPlayer;
-        updateBoard(game.choice, game.arr);
+        boardPrint(game.arr);
 
         if (checkWin(game.arr)) {
             printf("Player %c wins.\n", game.currentPlayer);
