@@ -92,7 +92,7 @@ int main(void) {
             game.gameInProgress = false;
         }
         else {
-            game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X';
+            game.currentPlayer = (game.currentPlayer == 'X') ? 'O' : 'X'; // Each turn—if it's 'X', it becomes 'O', and vice versa.
         }
     }
 
